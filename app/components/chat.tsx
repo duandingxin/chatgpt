@@ -440,7 +440,7 @@ export function Chat() {
     if (config.modelConfig.model == "gpt-3.5-turbo"||config.modelConfig.model == "gpt-3.5-turbo-0301") {
       axios({
         method: "get",
-        url: "https://a.workergpt.cn/user/checkexpirethree",
+        url: "https://test.workergpt.cn/user/checkexpirethree",
         withCredentials: true,
       }).then((res) => {
         if (res.data.code == 200) {
@@ -459,7 +459,7 @@ export function Chat() {
     } else {
       axios({
         method: "get",
-        url: "https://a.workergpt.cn/user/checkexpire",
+        url: "https://test.workergpt.cn/user/checkexpire",
         withCredentials: true,
       }).then((res) => {
         if (res.data.code == 200) {
@@ -610,7 +610,7 @@ export function Chat() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     axios({
       method: "get",
-      url: "https://a.workergpt.cn/user/checklogin",
+      url: "https://test.workergpt.cn/user/checklogin",
       withCredentials: true,
     }).then((res) => {
       if (res.data.code != 200) {

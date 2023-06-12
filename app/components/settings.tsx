@@ -199,7 +199,7 @@ export function Settings() {
 
     axios({
       method: "get",
-      url: "https://a.workergpt.cn/user/checklogin",
+      url: "https://test.workergpt.cn/user/checklogin",
       withCredentials: true,
     }).then((res) => {
       console.log(res);
@@ -227,7 +227,7 @@ export function Settings() {
   const getExpire = () => {
     axios({
       method: "get",
-      url: "https://a.workergpt.cn/user/getexpire",
+      url: "https://test.workergpt.cn/user/getexpire",
       withCredentials: true,
     }).then((res) => {
       setExpire(res.data.data);
@@ -237,7 +237,7 @@ export function Settings() {
   const getCurrentNumber = () => {
     axios({
       method: "get",
-      url: "https://a.workergpt.cn/user/getCurrentNumber",
+      url: "https://test.workergpt.cn/user/getCurrentNumber",
       withCredentials: true,
     }).then((res) => {
       setCurrentTime(res.data.data);
@@ -248,7 +248,7 @@ export function Settings() {
     if (localStorage.getItem("userInfo")) {
       axios({
         method: "get",
-        url: "https://a.workergpt.cn/common/logout",
+        url: "https://test.workergpt.cn/common/logout",
         withCredentials: true,
       }).then((res) => {
         if (res.data.code === 200) {
@@ -265,7 +265,7 @@ export function Settings() {
     if (event.key === "Enter") {
       axios({
         method: "post",
-        url: "https://a.workergpt.cn/redemption/getRedem",
+        url: "https://test.workergpt.cn/redemption/getRedem",
         data: {
           code,
           username: JSON.parse(localStorage.getItem("userInfo")).username,
@@ -290,7 +290,7 @@ export function Settings() {
     if (event.target.value.length == 16) {
       axios({
         method: "post",
-        url: "https://a.workergpt.cn/redemption/getRedem",
+        url: "https://test.workergpt.cn/redemption/getRedem",
         data: {
           code,
           username: JSON.parse(localStorage.getItem("userInfo")).username,
