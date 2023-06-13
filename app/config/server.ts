@@ -1,7 +1,7 @@
 import md5 from "spark-md5";
-import {useAppConfig} from "../store";
+// import { useAppConfig } from "../store";
+// import { useAppConfig } from "../store/config";
 
-const config = useAppConfig()
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
@@ -26,7 +26,9 @@ const ACCESS_CODES = (function getAccessCodes(): Set<string> {
   }
 })();
 
+
 export const getServerSideConfig = () => {
+  
   if (typeof process === "undefined") {
     throw Error(
       "[Server Config] you are importing a nodejs-only module outside of nodejs",
@@ -34,13 +36,14 @@ export const getServerSideConfig = () => {
   }
 
   const apiKeys = (process.env.OPENAI_API_KEY ?? '').split(',')
-  
-  let apiKey = ""
-  if (config.modelConfig.model == "gpt-3.5-turbo"||config.modelConfig.model == "gpt-3.5-turbo-0301"){
-    apiKey = apiKeys[0]
-  }else{
-    apiKey = apiKeys[1]
-  }
+  const apiKey = apiKeys.at(Math.floor(Math.random() * apiKeys.length )) ?? ''
+
+  // let apiKey = ""
+  // if (useAppConfig.getState().modelConfig.model == "gpt-3.5-turbo"|| useAppConfig.getState().modelConfig.model == "gpt-3.5-turbo-0301"){
+  //   apiKey = apiKeys[0]
+  // }else{
+  //   apiKey = apiKeys[1]
+  // }
 
   return {
     apiKey,
