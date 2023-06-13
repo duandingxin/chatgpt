@@ -1,5 +1,7 @@
 import md5 from "spark-md5";
+import {useAppConfig} from "../store";
 
+const config = useAppConfig()
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
@@ -32,7 +34,13 @@ export const getServerSideConfig = () => {
   }
 
   const apiKeys = (process.env.OPENAI_API_KEY ?? '').split(',')
-  const apiKey = apiKeys.at(Math.floor(Math.random() * apiKeys.length )) ?? ''
+  
+  let apiKey = ""
+  if (config.modelConfig.model == "gpt-3.5-turbo"||config.modelConfig.model == "gpt-3.5-turbo-0301"){
+    apiKey = apiKeys[0]
+  }else{
+    apiKey = apiKeys[1]
+  }
 
   return {
     apiKey,
