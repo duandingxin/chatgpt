@@ -438,7 +438,7 @@ export function Chat() {
   const onUserSubmit = () => {
     if (userInput.length <= 0) return;
     
-      if (config.modelConfig.model == "gpt-3.5-turbo" || config.modelConfig.model == "gpt-3.5-turbo-0301") {
+      if (config.modelConfig.model == "gpt-3.5-turbo" || config.modelConfig.model == "gpt-3.5-turbo-0613" || config.modelConfig.model =="gpt-3.5-turbo-16k" || config.modelConfig.model == "gpt-3.5-turbo-16k-0613") {
         setIsLoading(true);
         chatStore.onUserInput(userInput).then(() => setIsLoading(false));
         setBeforeInput(userInput);
