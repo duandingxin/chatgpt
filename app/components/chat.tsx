@@ -437,24 +437,35 @@ export function Chat() {
   // submit user input
   const onUserSubmit = () => {
     if (userInput.length <= 0) return;
-    axios({
-      method: "get",
-      url: "https://test.workergpt.cn/user/checkexpirethree",
-      withCredentials: true,
-    }).then((res) => {
-      if (res.data.code == 200) {
-        setIsLoading(true);
-        chatStore.onUserInput(userInput).then(() => setIsLoading(false));
-        setBeforeInput(userInput);
-        setUserInput("");
-        setPromptHints([]);
-        if (!isMobileScreen) inputRef.current?.focus();
-        setAutoScroll(true);
-      } else {
-        alert(res.data.msg);
-        navigate(Path.Commodity);
-      }
-    });
+    if(config.modelConfig.model == "HispreadText" || config.modelConfig.model=="HispreadText-Super" || config.modelConfig.model=="HispreadText-Internet"){
+      axios({
+        method: "get",
+        url: "https://test.workergpt.cn/user/checkexpirethree",
+        withCredentials: true,
+      }).then((res) => {
+        if (res.data.code == 200) {
+          setIsLoading(true);
+          chatStore.onUserInput(userInput).then(() => setIsLoading(false));
+          setBeforeInput(userInput);
+          setUserInput("");
+          setPromptHints([]);
+          if (!isMobileScreen) inputRef.current?.focus();
+          setAutoScroll(true);
+        } else {
+          alert(res.data.msg);
+          navigate(Path.Commodity);
+        }
+      });
+    }else{
+      setIsLoading(true);
+      chatStore.onUserInput(userInput).then(() => setIsLoading(false));
+      setBeforeInput(userInput);
+      setUserInput("");
+      setPromptHints([]);
+      if (!isMobileScreen) inputRef.current?.focus();
+      setAutoScroll(true);
+    }
+    
     
       // if (config.modelConfig.model == "gpt-3.5-turbo" || config.modelConfig.model == "gpt-3.5-turbo-0613" || config.modelConfig.model =="gpt-3.5-turbo-16k" || config.modelConfig.model == "gpt-3.5-turbo-16k-0613") {
         // setIsLoading(true);
